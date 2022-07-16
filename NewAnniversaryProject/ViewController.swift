@@ -72,15 +72,26 @@ class ViewController: UIViewController {
     }
     
     @IBAction func datePickAction(_ sender: UIDatePicker) {
+        let myDateFormatter = DateFormatter()
+        myDateFormatter.dateFormat = "yyyy년 \nMM월 dd일"
+        
         let datePickerView = sender
-        let formatter = DateFormatter()
-        let formatter2 = DateFormatter()
-        formatter.dateFormat = "yyyy년 \nMM월 dd일"
-        formatter2.dateFormat = "yyyy년 MM월 dd일"
-        
-        standardDateLabel.text = "선택날짜: " + formatter2.string(from: datePickerView.date)
+        calcuDateLabelCollection[0].text = myDateFormatter.string(from: datePickerView.date)//여기에 100일이 더해져야됨
+        //계산된 결과가 ""의 안에 들어오도록
         
         
+        let date = datePickerView.date
+        let calendar = Calendar.current
+        let component1 = calendar.date(byAdding: .day, value: 99, to: date)
+        let component2 = calendar.date(byAdding: .day, value: 199, to: date)
+        let component3 = calendar.date(byAdding: .day, value: 299, to: date)
+        let component4 = calendar.date(byAdding: .day, value: 399, to: date)
+        
+        calcuDateLabelCollection[0].text = myDateFormatter.string(from: component1!)
+        calcuDateLabelCollection[1].text = myDateFormatter.string(from: component2!)
+        calcuDateLabelCollection[2].text = myDateFormatter.string(from: component3!)
+        calcuDateLabelCollection[3].text = myDateFormatter.string(from: component4!)
+       
     }
     
 
